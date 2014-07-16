@@ -1,0 +1,3 @@
+#sensitive files
+pillar/myShadow.sls
+data/saltServersList.csv
