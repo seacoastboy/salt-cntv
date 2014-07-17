@@ -3,19 +3,22 @@ salt-cntv
 
 ## Architecture
 ```
-/data/saltServersList.csv server parameters	#human readable managed servers data
+/data/saltServersList.csv server parameters     #human readable managed servers data
     ^^^
     |||
-/shell/convertServerList.sh			#conver above table to salt pillar
+/shell/convertServerList.sh                     #conver above table to salt pillar
     |||
     VVV
-salt pillar					#varible data based on serverIP
+salt pillar                                     #varible data based on serverIP
     ^^^
     |||
-salt states file				#pre defined states files
+salt states file                                #pre defined states files
+    ^^^
+    |||
+halite or salt master cli                       #tiggered tasks by human
     |||
     VVV
-salt minion					#make changes and hold the right status on each server!
+salt minion                                     #make changes and hold the right status on each server!
 ```
 
 ## jinja2
