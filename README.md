@@ -2,6 +2,7 @@ salt-cntv
 =========
 
 ## Architecture
+```
 /data/saltServersList.csv server parameters	#human readable managed servers data
     ^^^
     |||
@@ -15,7 +16,7 @@ salt states file				#pre defined states files
     |||
     VVV
 salt minion					#make changes and hold the right status on each server!
-
+```
 
 ## jinja2
 中文文档：
