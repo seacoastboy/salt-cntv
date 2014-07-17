@@ -1,6 +1,22 @@
 salt-cntv
 =========
 
+## Architecture
+/data/saltServersList.csv server parameters	#human readable managed servers data
+    ^^^
+    |||
+/shell/convertServerList.sh			#conver above table to salt pillar
+    |||
+    VVV
+salt pillar					#varible data based on serverIP
+    ^^^
+    |||
+salt states file				#pre defined states files
+    |||
+    VVV
+salt minion					#make changes and hold the right status on each server!
+
+
 ## jinja2
 中文文档：
 http://docs.jinkan.org/docs/jinja2/templates.html
