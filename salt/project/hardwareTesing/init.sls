@@ -15,6 +15,7 @@ hardwareTesing_pkg:
       - libaio-devel
       - sysbench
       - gcc-c++
+      - screen
 
 /root/testSuite/systemSummary.txt:
   file.managed:

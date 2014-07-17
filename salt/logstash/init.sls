@@ -19,7 +19,7 @@ logstash_pkg:
 
 
 ##创建并设置目录权限@@
-{% for path in '/opt/logstash', '/opt/logstash/etc', '/opt/logstash/patterns', '/opt/logstash/tmp', '/var/log/logstash' %}
+{% for path in '/opt/logstash', '/opt/logstash/tmp', '/var/log/logstash' %}
 {{ path }}:
   file.directory:
     - makedirs: True
@@ -35,24 +35,14 @@ logstash_pkg:
 {% endfor %}
 
 ##拷贝files目录下文件@@
-/opt/logstash/patterns/grok-patterns:
-  file.managed:
-    - source: salt://logstash/files/etc/grok-patterns
-    - user: logstash
+/opt/logstash/etc:
+  file.recurse:
+    - source: salt://logstash/files/etc
+    - user: root
     - group: root
-    - mode: 0755
-    - require:
-      - file: /opt/logstash/patterns
-{% for file in 'GeoLiteCity.dat', 'logstash-2.json' %}
-/opt/logstash/etc/{{ file }}:
-  file.managed:
-    - source: salt://logstash/files/etc/{{ file }}
-    - user: logstash
-    - group: root
-    - mode: 0755
-    - require:
-      - file: /opt/logstash/etc
-{% endfor %}
+    - file_mode: 0644
+    - dir_mode: 0755
+    - makedirs: True
 
 ####单机多实例非公共配置循环@@
 
@@ -91,7 +81,6 @@ logstash_{{role}}_service:
     - timeout: 15
     - watch:
       - file: /opt/logstash/etc/{{role}}.conf
-      - file: /opt/logstash/patterns/grok-patterns
 {% endif %}
 {% endfor %}
 
